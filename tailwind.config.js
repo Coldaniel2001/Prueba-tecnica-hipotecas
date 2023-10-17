@@ -5,8 +5,10 @@ module.exports = {
     extend: {
       colors:{
         'navBlue': '#0038ff',
-        'strongRed': '#FF0000',
         'backgroundSky':'#7ACFFF',
+        'lightBlue' : '#00A3FF',
+        'strongRed': '#FF0000',
+        'redBrown':'#DC0000',
       }
     },
   },

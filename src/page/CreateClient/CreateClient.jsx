@@ -1,13 +1,18 @@
-import React, { useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 
 
 import Navbar from "../../component/Navbar/Navbar"
 import toast from "react-hot-toast"
 
+import DNIContext from "../../context/DNI/DNIContext";
+
+
+
 
 const CreateClient = () => {
-
     const resetInput = useRef();
+
+    const { calculateWordDni } = useContext(DNIContext)
 
     const [createInput, setCreateInput] = useState({
         name: "",
@@ -15,19 +20,18 @@ const CreateClient = () => {
         gmail: ""
     })
 
+
+
+
     const handleInput = (event) => {
         setCreateInput({ ...createInput, [event.target.name]: event.target.value })
     }
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (calculateWordDni(createInput.dni)[1] === true) {
-            toast.success("La creación de un nuevo cliente ha sido todo un exito.");
+        if(createInput.dni.length === 8){
             createInput.dni += calculateWordDni(createInput.dni)[0];
-            createClient();
-            resetInput.current.click();
-        } else {
-            toast.error("Tienes que rellenar los 8 digitos de tu numero del DNI");
         }
+        createClient();
     }
 
     const createClient = async () => {
@@ -43,22 +47,28 @@ const CreateClient = () => {
             );
             const data = await response.json();
 
-            console.log(data)
+            switch (data.status) {
+                case "EXISTE Gmail y DNI":
+                    toast.error("Ya existe ese Gmail y DNI");
+                    break;
+                case "EXISTE DNI":
+                    toast.error("Ya existe ese DNI");
+                    break;
+                case "EXISTE Gmail":
+                    toast.error("Ya existe ese Gmail");
+                    break;
+                default:
+                    toast.success("La creación de un nuevo cliente ha sido todo un exito.");
+                    resetInput.current.click();
+                    break;
+            }
+
         } catch (error) {
             console.log(error);
         }
     };
 
 
-    const calculateWordDni = (digitsDni) => {
-
-        const tableWords = 'TRWAGMYFPDXBNJZSQVHLCKE';
-        if (digitsDni.length === 8) {
-            return [tableWords.charAt(digitsDni % 23), true];
-        } else {
-            return [false];
-        }
-    }
 
     return (
         <>
@@ -79,7 +89,7 @@ const CreateClient = () => {
                                 </div>
                                 <div className="flex justify-between w-[70%]">
                                     <label>DNI:</label>
-                                    <input className="bg-lightBlue text-white w-[55%]" type="number" name="dni" onChange={handleInput} required />
+                                    <input className="bg-lightBlue text-white w-[55%]" type="number" name="dni" onChange={handleInput} min={11111111} max={99999999}  required />
                                 </div>
                                 <div className="flex justify-between w-[70%]">
                                     <label>Gmail:</label>

@@ -9,7 +9,7 @@ const Navbar = () => {
 					<span>Crear Cliente</span>
 				</div>
 			</NavLink>
-			<NavLink to={"/"} className={({ isActive }) => isActive ? 'flex items-center justify-center  w-[33.33333%] h-[100%] bg-strongRed' : 'flex items-center justify-center  w-[33.33333%] h-[100%] bg-navBlue'}>
+			<NavLink to={"/consultClient"} className={({ isActive }) => isActive ? 'flex items-center justify-center  w-[33.33333%] h-[100%] bg-strongRed' : 'flex items-center justify-center  w-[33.33333%] h-[100%] bg-navBlue'}>
 				<div>
 					<span>Consultar Cliente</span>
 				</div>

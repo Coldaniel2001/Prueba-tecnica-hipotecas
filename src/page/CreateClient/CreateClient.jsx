@@ -7,8 +7,6 @@ import toast from "react-hot-toast"
 import DNIContext from "../../context/DNI/DNIContext";
 
 
-
-
 const CreateClient = () => {
     const resetInput = useRef();
 
@@ -19,7 +17,6 @@ const CreateClient = () => {
         dni: "",
         gmail: ""
     })
-
 
 
 

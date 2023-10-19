@@ -1,0 +1,98 @@
+import React, { useState, useContext, useEffect } from "react";
+
+import toast from "react-hot-toast";
+
+import ConsultClientContext from "./ConsultClientContext";
+import DNIContext from "../DNI/DNIContext";
+
+
+const ConsultClientProvider = ({ children }) => {
+
+    const { calculateWordDni } = useContext(DNIContext)
+
+    const [consult, setConsult] = useState({
+        state: false,
+        dni: "",
+        stateSimulator: false,
+    });
+
+
+    const [simulator, setSimulator] = useState({
+        concept: "",
+        finance: 0,
+        amortization: 0,
+        interest: 0,
+        result: 0
+    });
+
+    const [resultSimu, setResultSimu] = useState();
+
+    
+
+
+
+    useEffect(() => {
+        const simulatorResults = async () => {
+            setResultSimu({...simulator, result:(parseFloat(simulator.finance) * parseFloat((simulator.interest / 100 / 12))) / (1 - (Math.pow(1 + (simulator.interest / 100 / 12), -(simulator.amortization * 12))))})
+
+        };
+        simulatorResults();
+
+      }, [simulator]);
+
+
+
+    const [infoClient, setInfoClient] = useState();
+
+    const handleDni = (event) => {
+        setConsult({ ...consult, dni: event.target.value })
+    }
+    const handleConsult = async () => {
+        if (consult.dni === "") {
+            consult.state === true && setConsult({ ...consult, state: false });
+            toast.error("Rellene El recuadro para coger la información del cliente")
+        } else if (consult.dni.length < 8) {
+            consult.state === true && setConsult({ ...consult, state: false });
+            toast.error("Tiene que tener un minimo de 8 caracteres para realizar la consulta")
+        } else {
+            if (consult.dni.length === 8) {
+                consult.dni += calculateWordDni(consult.dni)[0];
+            }
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/users/create/${consult.dni}`);
+                const data = await response.json();
+                setInfoClient(data.getOneClient);
+                if (data.getOneClient === null) {
+                    toast.error("Este Cliente no existe")
+                    if (consult.state === true) {
+                        setConsult({ ...consult, state: false });
+                    }
+                } else {
+                    toast.success("La Consulta del cliente ha sido todo un exito.");
+                    if (consult.state === false) {
+                        setConsult({ ...consult, state: true });
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+
+    }
+    return (
+        <ConsultClientContext.Provider
+            value={{
+                consult, setConsult,
+                simulator, setSimulator,
+                resultSimu,
+                infoClient, setInfoClient,
+                handleDni,
+                handleConsult
+            }}>
+            {children}
+        </ConsultClientContext.Provider>
+    )
+}
+
+export default ConsultClientProvider

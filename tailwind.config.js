@@ -3,12 +3,13 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      colors:{
+      colors: {
         'navBlue': '#0038ff',
-        'backgroundSky':'#7ACFFF',
-        'lightBlue' : '#00A3FF',
+        'strongNavBlue': '#1B76FF',
+        'backgroundSky': '#7ACFFF',
+        'lightBlue': '#00A3FF',
         'strongRed': '#FF0000',
-        'redBrown':'#DC0000',
+        'redBrown': '#DC0000',
       }
     },
   },

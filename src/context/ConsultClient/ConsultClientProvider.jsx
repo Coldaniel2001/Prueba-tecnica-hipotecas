@@ -39,6 +39,7 @@ const ConsultClientProvider = ({ children }) => {
 
 
     const [infoClient, setInfoClient] = useState();
+    const [infoUpdateClient, setInfoUpdateClient] = useState();
     const [infoFinances, setInfoFinances] = useState();
 
     const handleDni = (event) => {
@@ -59,6 +60,7 @@ const ConsultClientProvider = ({ children }) => {
                 const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/users/create/${consult.dni}`);
                 const data = await response.json();
                 setInfoClient(data.getOneClient);
+                setInfoUpdateClient(data.getOneClient)
                 if (data.getOneClient === null) {
                     toast.error("Este Cliente no existe")
                     if (consult.state === true) {
@@ -94,6 +96,7 @@ const ConsultClientProvider = ({ children }) => {
                 simulator, setSimulator,
                 resultSimu,
                 infoClient, setInfoClient,
+                infoUpdateClient, setInfoUpdateClient,
                 infoFinances, setInfoFinances,
                 handleDni,
                 handleConsult

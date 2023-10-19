@@ -10,9 +10,12 @@ module.exports = {
         'lightBlue': '#00A3FF',
         'strongRed': '#FF0000',
         'redBrown': '#DC0000',
+        'gold' : '#B0A900'
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }
 

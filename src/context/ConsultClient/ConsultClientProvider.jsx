@@ -27,22 +27,19 @@ const ConsultClientProvider = ({ children }) => {
 
     const [resultSimu, setResultSimu] = useState();
 
-    
-
-
-
     useEffect(() => {
         const simulatorResults = async () => {
-            setResultSimu({...simulator, result:(parseFloat(simulator.finance) * parseFloat((simulator.interest / 100 / 12))) / (1 - (Math.pow(1 + (simulator.interest / 100 / 12), -(simulator.amortization * 12))))})
+            setResultSimu({ ...simulator, result: (parseFloat(simulator.finance) * parseFloat((simulator.interest / 100 / 12))) / (1 - (Math.pow(1 + (simulator.interest / 100 / 12), -(simulator.amortization * 12)))) })
 
         };
         simulatorResults();
 
-      }, [simulator]);
+    }, [simulator]);
 
 
 
     const [infoClient, setInfoClient] = useState();
+    const [infoFinances, setInfoFinances] = useState();
 
     const handleDni = (event) => {
         setConsult({ ...consult, dni: event.target.value })
@@ -69,6 +66,7 @@ const ConsultClientProvider = ({ children }) => {
                     }
                 } else {
                     toast.success("La Consulta del cliente ha sido todo un exito.");
+                    getInfoFinances()
                     if (consult.state === false) {
                         setConsult({ ...consult, state: true });
                     }
@@ -77,9 +75,18 @@ const ConsultClientProvider = ({ children }) => {
                 console.log(error);
             }
         }
-
-
     }
+    const getInfoFinances = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/finances/${consult.dni}`);
+            const data = await response.json();
+            setInfoFinances(data.getInfoFinances);
+
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
     return (
         <ConsultClientContext.Provider
             value={{
@@ -87,6 +94,7 @@ const ConsultClientProvider = ({ children }) => {
                 simulator, setSimulator,
                 resultSimu,
                 infoClient, setInfoClient,
+                infoFinances, setInfoFinances,
                 handleDni,
                 handleConsult
             }}>

@@ -1,0 +1,1 @@
+export { default as InfoDataFinances } from './InfoDataFinances';

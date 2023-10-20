@@ -19,9 +19,6 @@ const ModalEditClient = ({dialogEditClient} ) => {
 
     const handleSubmitClient = (event) => {
         event.preventDefault();
-        toast.success("La actualización del cliente ha sido todo un éxito");
-        dialogEditClient.current.close();
-        setInfoClient(infoUpdateClient)
         updateClient()
     }
 
@@ -42,7 +39,13 @@ const ModalEditClient = ({dialogEditClient} ) => {
             );
             const data = await response.json();
 
-            console.log(data)
+            if(data.status==="OK"){
+                toast.success("La actualización del cliente ha sido todo un éxito");
+                setInfoClient(infoUpdateClient)
+                dialogEditClient.current.close();
+            }else{
+                toast.error("El email ya existe")
+            }
 
         } catch (error) {
             console.log(error);

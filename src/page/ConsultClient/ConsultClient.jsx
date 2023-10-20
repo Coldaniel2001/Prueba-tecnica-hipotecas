@@ -2,15 +2,16 @@ import React, { useContext } from "react"
 
 
 import Navbar from "../../component/Navbar/Navbar"
-
+import ConsultDni from "../../component/ConsultDni/ConsultDni";
 import InfoProfile from "../../component/InfoProfile/InfoProfile";
+
 
 import ConsultClientContext from "../../context/ConsultClient/ConsultClientContext"
 
 const ConsultClient = () => {
 
 
-    const { consult, handleDni, handleConsult} = useContext(ConsultClientContext)
+    const { consult} = useContext(ConsultClientContext)
 
     return (
         <>
@@ -19,14 +20,10 @@ const ConsultClient = () => {
             </div>
 
             <div className="h-[80vh] w-[100vw] bg-backgroundSky">
-                <div className="flex justify-around items-center w-[50%]  h-[15vh]">
-                    <label>DNI:</label>
-                    <input type="number" onChange={handleDni} />
-                    <button onClick={handleConsult} className="bg-lightBlue text-white w-[25%]">Consultar</button>
-                </div>
+                <ConsultDni />
                 {consult.state ? <div className="flex justify-center items-center">
                     <div className="flex justify-center h-[60vh] w-[90%] bg-white">
-                      <InfoProfile/>
+                        <InfoProfile />
                     </div>
                 </div> : ""}
             </div>

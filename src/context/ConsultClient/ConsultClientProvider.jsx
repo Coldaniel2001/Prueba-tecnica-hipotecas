@@ -26,21 +26,31 @@ const ConsultClientProvider = ({ children }) => {
     });
 
     const [resultSimu, setResultSimu] = useState();
-
-    useEffect(() => {
-        const simulatorResults = async () => {
-            setResultSimu({ ...simulator, result: (parseFloat(simulator.finance) * parseFloat((simulator.interest / 100 / 12))) / (1 - (Math.pow(1 + (simulator.interest / 100 / 12), -(simulator.amortization * 12)))) })
-
-        };
-        simulatorResults();
-
-    }, [simulator]);
-
-
+    const [resultUpdateSimu, setResultUpdateSimu] = useState();
 
     const [infoClient, setInfoClient] = useState();
     const [infoUpdateClient, setInfoUpdateClient] = useState();
     const [infoFinances, setInfoFinances] = useState();
+    const [infoUpdatesFinances, setInfoUpdatesFinances] = useState();
+
+    useEffect(() => {
+        const simulatorResults = async () => {
+            setResultSimu({ ...simulator, result: (parseFloat(simulator.finance) * parseFloat((simulator.interest / 100 / 12))) / (1 - (Math.pow(1 + (simulator.interest / 100 / 12), -(simulator.amortization * 12)))) })
+        };
+        simulatorResults();
+
+    }, [simulator]);
+    useEffect(() => {
+        const updateResults = async () => {
+            setResultUpdateSimu({ ...infoUpdatesFinances, monthlyFee: (parseFloat(infoUpdatesFinances?.finance) * parseFloat((infoUpdatesFinances?.interest / 100 / 12))) / (1 - (Math.pow(1 + (infoUpdatesFinances?.interest / 100 / 12), -(infoUpdatesFinances?.amortization * 12)))) })
+        };
+        updateResults();
+
+    }, [infoUpdatesFinances]);
+
+
+
+
 
     const handleDni = (event) => {
         setConsult({ ...consult, dni: event.target.value })
@@ -83,7 +93,6 @@ const ConsultClientProvider = ({ children }) => {
             const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/finances/${consult.dni}`);
             const data = await response.json();
             setInfoFinances(data.getInfoFinances);
-
         } catch (error) {
             console.log(error)
         }
@@ -95,9 +104,11 @@ const ConsultClientProvider = ({ children }) => {
                 consult, setConsult,
                 simulator, setSimulator,
                 resultSimu,
+                resultUpdateSimu,
                 infoClient, setInfoClient,
                 infoUpdateClient, setInfoUpdateClient,
                 infoFinances, setInfoFinances,
+                infoUpdatesFinances, setInfoUpdatesFinances,
                 handleDni,
                 handleConsult
             }}>

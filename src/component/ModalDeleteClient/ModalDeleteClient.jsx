@@ -31,7 +31,6 @@ const ModalDeleteClient = ({ dialogDeleteClient, dialogEditClient }) => {
 			const data = await response.json();
 
 
-console.log(infoClient)
 			const response2 = await fetch(`${process.env.REACT_APP_SERVER_URL}/finances/deleteClientFinances/${infoClient.dni}`,
 				{
 					method: "DELETE",

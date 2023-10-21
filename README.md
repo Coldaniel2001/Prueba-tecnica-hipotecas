@@ -11,7 +11,7 @@ https://reliable-eclair-18804e.netlify.app/consultClient
 
 ## Scripts Disponibles
 
-In este proyecto podremos arrancar con el
+En este proyecto podremos arrancar con los siguientes scripts:
 
 ### `npm start`
 

@@ -21,7 +21,7 @@ const InfoMortgage = () => {
 						finance: simulator.finance,
 						amortization: simulator.amortization,
 						interest: simulator.interest,
-						result: simulator.result
+						// result: simulator.result
 					}),
 				}
 			);

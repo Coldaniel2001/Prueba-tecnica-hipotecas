@@ -34,7 +34,6 @@ const ModalEditFinances = ({ dialogEditFinances, getFinance }) => {
 						finance: resultUpdateSimu.finance,
 						amortization: resultUpdateSimu.amortization,
 						interest: resultUpdateSimu.interest,
-						monthlyFee: resultUpdateSimu.monthlyFee.toFixed(2),
 						userDni: resultUpdateSimu.userDni
 					}),
 				}

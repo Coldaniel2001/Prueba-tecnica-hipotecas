@@ -1,5 +1,13 @@
-# Como arrancar el el simulador de una hipoteca
+# Utilidad de la aplicación
 
+Es muy útil para poder calcular la cuota mensual de una hipoteca, poder almacenar esos datos para cada cliente. Pudiendo también borrar los datos y editarlos tanto la información del cliente
+como los datos financieros de esa hipoteca.
+
+## Ver aplicación en producción
+
+https://reliable-eclair-18804e.netlify.app/consultClient
+
+# Como arrancar el el simulador de una hipoteca
 
 ## Scripts Disponibles
 
@@ -49,6 +57,8 @@ Es muy probable que cuando arranquemos al darle inspeccionar en consola nos salg
 ![image](https://github.com/Coldaniel2001/prueba-tecnica-hipotecas/assets/105484687/840684d0-72d9-4122-afcd-85a475245d1c)
 podéis meteros en la página npm y buscar uno por uno para instalarlo, pero con solo saber el nombre de cada uno de ellos, tan solo poner en la consola npm i [nombre] y ya se instalaría, por ejemplo:
 ![image](https://github.com/Coldaniel2001/prueba-tecnica-hipotecas/assets/105484687/2f99d148-2c5e-4d16-b55d-f14c801d230f)
+
+
 
 
 

@@ -35,7 +35,7 @@ La compilación está minimizada y los nombres de archivos incluyen los hashes.\
 
 Si no está satisfecho con la herramienta de compilación y las opciones de configuración, puede "expulsar" en cualquier momento. Este comando eliminará la dependencia de compilación única de su proyecto.
 
-En su lugar, copiará todos los archivos de configuración y las dependencias transitivas (webpack, Babel, ESLint, etc.) directamente en su proyecto para que tenga control total sobre ellos. Todos los comandos excepto "expulsar" seguirán funcionando, pero apuntarán a los scripts copiados para que puedas modificarlos. En este punto estás solo.
+En su lugar, copiará todos los archivos de configuración y las dependencias transitivas (webpack, Babel, ESLint, etc.) directamente en su proyecto para que tenga control total sobre ellos. Todos los comandos excepto "eject" seguirán funcionando, pero apuntarán a los scripts copiados para que puedas modificarlos. En este punto estás solo.
 
 Nunca es necesario utilizar "eject". El conjunto de funciones seleccionado es adecuado para implementaciones pequeñas y medianas, y no debería sentirse obligado a utilizar esta función. Sin embargo, entendemos que esta herramienta no sería útil si no pudiera personalizarla cuando esté listo para usarla.
 
